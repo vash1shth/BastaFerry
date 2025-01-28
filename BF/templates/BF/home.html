@@ -1,0 +1,374 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basta Ferry</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #00C4CC, #0A1A44);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 70px;
+            margin-right: 10px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .button {
+            background-color: #00C4CC;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            padding: 0 50px;
+        }
+        .welcome-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 0; /* Remove any gap */
+        }
+        .welcome-text, .basta-ferry-text {
+            font-size: 5em;
+            color: rgb(5,5,5);
+            margin: 0;
+            padding: 0;
+            line-height: 1; /* Adjust line height to reduce gap */
+        }
+        .man img {
+            width: 500px;
+        }
+        .basta-ferry {
+            font-size: 1.5em;
+            color: rgb(255, 255, 255);
+        }
+        .bastaferry-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #ffffff;
+            color: #333;
+        }
+        .bastaferry-text {
+            max-width: 50%;
+        }
+        .bastaferry-text h1 {
+            font-size: 3em;
+            color: #2c3e50;
+        }
+        .bastaferry-text p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        .bastaferry-image {
+            max-width: 40%;
+        }
+        .bastaferry-image img {
+            width: 100%;
+            border-radius: 15px;
+        }
+        .choose-bastaferry {
+            padding: 50px;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+        }
+        .choose-bastaferry h2 {
+            font-size: 3em;
+            color: #2c3e50;
+        }
+        .reasons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .reason {
+            background-color: linear-gradient(to bottom right, #00C4CC, #0A1A44);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 30%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .reason .number {
+            font-size: 2em;
+            color: #00C4CC;
+        }
+        .reason h3 {
+            font-size: 1.5em;
+            color: #00C4CC;
+        }
+        .reason p {
+            font-size: 1em;
+            color: #00C4CC;
+        }
+        .reviews-section { 
+            padding: 50px; 
+            background-color: #0A1A44; 
+            color: white; 
+            text-align: center; 
+        } 
+        .reviews-section h2 { 
+            font-size: 3em; 
+            color: #ffffff; 
+        }
+        .testimonials { 
+            display: flex; 
+            align-content: center;
+            justify-content: space-around; 
+            margin-top: 20px; 
+        } 
+        .testimonial {
+             max-width: 30%; 
+             text-align: left; 
+            } 
+            .testimonial p { 
+                font-size: 1.2em; 
+                color: #00C4CC; 
+            } 
+            .testimonial p:last-child { 
+                font-size: 1em; 
+            }
+        .collections-section { 
+            padding: 50px; 
+            background-color: #f8f9fa; 
+            color: #333; 
+            text-align: center; 
+        } 
+        .collections-section h2 { 
+            font-size: 3em; 
+            color: #2c3e50; 
+        } 
+        .collections { 
+            display: flex; 
+            justify-content: space-around; 
+            margin-top: 20px; 
+        } 
+        .collection { 
+            max-width: 30%; 
+            text-align: left; 
+        } 
+        .collection img { 
+            width: 100%; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        } 
+        .collection h3 { 
+            font-size: 1.5em; 
+            color: #2c3e50; 
+        }
+        .collection p { 
+            font-size: 1em; 
+            color: #7f8c8d; 
+        }
+
+        .footer { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background-color: linear-gradient(to bottom right, #00C4CC, #0A1A44);
+            padding: 20px; 
+            color: #ffffff;  
+        }
+        .contact-section { 
+            flex: 1; 
+        } 
+        .contact-section h2 { 
+            color: #00C4CC; 
+        } 
+        .contact-info { 
+            display: flex; 
+            justify-content: space-between; 
+        }
+        .contact-item { 
+            margin-bottom: 20px; 
+        } 
+        .contact-item h3 { 
+            margin: 0; 
+            font-size: 1.2em; 
+        } 
+        .contact-item p { 
+            margin: 5px 0 0; 
+        } 
+        .social-icons { 
+            display: flex; 
+            gap: 10px; 
+        } 
+        .social-icons a img { 
+            width: 24px; 
+            height: 24px; 
+        } 
+        .shopping-bag { 
+            display: flex; 
+            align-items: center; 
+        } 
+        .shopping-bag img { 
+            width: 100px; 
+            height: auto; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'BF/Images/BFlogo.png' %}" alt="Basta Ferry Logo">
+            <span class="basta-ferry">BASTA FERRY</span>
+        </div>
+        <div class="buttons">
+            <a href="{% url 'login' %}" class="button">Login</a> 
+            <a href="{% url 'signup' %}" class="button">SignUp</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="welcome-section">
+            <h1>WELCOME TO</h1>
+            <h1 class="welcome-text">BASTA FERRY</h1>
+            <a href="{% url 'buynow' %}" class="button">Buy Now</a>
+        </div>
+        <div class="man">
+            <img src="{% static 'BF/Images/man.png' %}" alt="Man Image">
+        </div>
+    </div>
+    <!-- New BastaFerry Section -->
+    <div class="bastaferry-section">
+        <div class="bastaferry-text">
+            <h1>Say Hello to BastaFerry</h1>
+            <p>At BastaFerry, we’re passionate about helping your carry style. Our journey began with a simple idea: to provide high quality, affordable bags that make your daily commute, travel, or work easier.</p>
+        </div>
+        <div class="bastaferry-image">
+            <img src="{% static 'BF/Images/bag.png' %}" alt="Person holding a BastaFerry bag">
+        </div>
+    </div>
+    <!-- New Choose BastaFerry Section -->
+    <div class="choose-bastaferry">
+        <h2>Why Choose BastaFerry?</h2>
+        <div class="reasons">
+            <div class="reason">
+                <!-- New image container -->
+                <img id="reason1-img" src="" alt="Reason 1 Image" style="width:100%;">
+            </div>
+            <div class="reason">
+                <!-- New image container -->
+                <img id="reason2-img" src="" alt="Reason 2 Image" style="width:100%;">
+            </div>
+            <div class="reason">
+                <!-- New image container -->
+                <img id="reason3-img" src="" alt="Reason 3 Image" style="width:100%;">
+            </div>
+        </div>
+    </div>
+    <!-- New Reviews Section --> 
+     <div class="reviews-section"> 
+        <h2>Read the reviews</h2> 
+        <div class="testimonials"> 
+            <div class="testimonial"> 
+                <p>“Testimonials are short quotes from people who love your brand. It's a great way to convince customers to try your services.”</p> 
+                <p>Ingrid Correa</p> 
+            </div>
+             <div class="testimonial"> 
+                <p>“Testimonials are short quotes from people who love your brand. It's a great way to convince customers to try your services.”</p>
+                 <p>Hilford Press</p> </div> <div class="testimonial">
+                     <p>“Testimonials are short quotes from people who love your brand. It's a great way to convince customers to try your services.”</p> 
+                     <p>Daichi Hamada</p> 
+                    </div> 
+                </div>
+             </div>
+    <!-- New Collections Section -->
+<div class="collections-section" style="padding: 50px; background-color: #f8f9fa; color: #333; text-align: center;">
+    <h2 style="font-size: 3em; color: #2c3e50;">Our Collections</h2>
+    <div class="collections" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <div class="collections-image" style="max-width: 40%;">
+            <img src="{% static 'BF/Images/collections.png' %}" alt="Collections Image" style="width: 100%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        </div>
+        <div class="collections-text" style="max-width: 50%; text-align: left;">
+            <h3 style="font-size: 1.5em; color: #2c3e50;">Daily Essentials</h3>
+            <p style="font-size: 1em; color: #7f8c8d;">Explore our range of bags perfect for your everyday needs. Functional and stylish for any occasion.</p>
+            <h3 style="font-size: 1.5em; color: #2c3e50;">Travel Companions</h3>
+            <p style="font-size: 1em; color: #7f8c8d;">Discover our selection of travel bags that combine durability and elegance, ideal for all your adventures.</p>
+            <h3 style="font-size: 1.5em; color: #2c3e50;">Fashion Statements</h3>
+            <p style="font-size: 1em; color: #7f8c8d;">Make a statement with our high-end fashion bags designed to turn heads and complete your look.</p>
+        </div>
+    </div>
+</div>
+         
+        
+<div class="footer" id="footer">
+    <div class="contact-section">
+        <h2>Contact</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>Phone</h3>
+                <p>+91-8950205073</p>
+            </div>
+            <div class="contact-item">
+                <h3>Email</h3>
+                <p>Bastafery@gmail.com</p>
+            </div>
+            <div class="contact-item">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="{% static 'BF/Images/facebook.png' %}" alt="Facebook"></a>
+                    <a href="#"><img src="{% static 'BF/Images/twitter.png' %}" alt="Twitter"></a>
+                    <a href="#"><img src="{% static 'BF/Images/instagram.png' %}" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shopping-bag">
+        <img src="{% static 'BF/Images/BFlogo.png' %}" alt="Shopping Bag">
+    </div>
+    <p>&copy; 2025 Basta Ferry. All rights reserved.</p>
+</div>
+
+
+
+    <!-- JavaScript to dynamically set images -->
+    <script>
+        const reasons = [
+            { id: "reason1-img", src: "{% static 'BF/Images/reason1-img.png' %}" },
+            { id: "reason2-img", src: "{% static 'BF/Images/reason2-img.png' %}" },
+            { id: "reason3-img", src: "{% static 'BF/Images/reason3-img.png' %}" }
+        ];
+
+        reasons.forEach(reason => {
+            document.getElementById(reason.id).src = reason.src;
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
