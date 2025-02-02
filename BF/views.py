@@ -19,7 +19,7 @@ def login(request):
         password = request.POST['password']
         # Perform authentication here
         # If authentication is successful
-        return render(request, 'BF/buynow.html')
+        return render(request, 'BF/test.html')
     else:
         # If GET request or any other method
         return render(request, 'BF/login.html')
@@ -33,7 +33,7 @@ def signup(request):
             form.save()
             return redirect('login')  # Redirect to login page after successful signup
         else:
-            return render(request, 'signup.html', {'form': form})  # Re-render the form with errors
+            return render(request, 'BF/signup.html', {'form': form})  # Re-render the form with errors
     else:
         form = UserCreationForm()
 

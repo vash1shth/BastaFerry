@@ -135,7 +135,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = '/login/'
 
 DEBUG = True
-AUTH_USER_MODEL = 'BF.User' 
+
 
 
 
