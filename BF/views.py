@@ -39,7 +39,7 @@ def signup(request):
 
     return render(request, 'BF/signup.html', {'form': form})
 
-@login_required
+#@login_required
 def buynow(request):
     return render(request, 'BF/test.html')
 

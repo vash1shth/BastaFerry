@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,22 +7,23 @@
     <title>Shop Men's Bags</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #00C4CC, #0A1A44);
+            color: white;
         }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background-color: #333;
-            color: #fff;
+            background-color: white;
+            color: black;
         }
         header .icons {
             display: flex;
             gap: 20px;
+            color: black;
         }
         header .icons i {
             font-size: 24px;
@@ -60,8 +62,8 @@
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #333;
-            color: #fff;
+            background-color: white;
+            color: black;
         }
     </style>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -82,19 +84,18 @@
         </div>
     </main>
     <footer>
-        <p>© 2025 Your Website Name</p>
+        <p>© 2025 Bastaferry</p>
     </footer>
 
     <script>
         const products = [
-            { id: 1, name: 'Standard Bag', color: 'Brown', price: '₹2,000', description: 'High-quality leather briefcase for professionals.', image: 'bag1_brown.jpg' },
-            { id: 2, name: 'Standard Bag', color: 'Black', price: '₹2,000', description: 'High-quality leather briefcase for professionals.', image: 'bag1_black.jpg' },
-            { id: 3, name: 'Gym Duffel Bag', color: 'Brown', price: '₹1,999', description: 'Durable and stylish backpack for everyday use.', image: 'bag2_brown.jpg' },
-            { id: 4, name: 'Gym Duffel Bag', color: 'Black', price: '₹1,999', description: 'Durable and stylish backpack for everyday use.', image: 'ba2_black.jpg' },
-            { id: 5, name: 'Laptop Messenger Bag', color: 'Brown', price: '₹3,299', description: 'Spacious duffel bag for all your travel needs.', image: 'bag3_brown.jpg' },
-            { id: 6, name: 'Laptop Messenger Bag', color: 'Black', price: '₹3,299', description: 'Spacious duffel bag for all your travel needs.', image: 'bag3_black.jpg' },
-            { id: 7, name: 'Laptop Backpack', color: 'Brown', price: '₹1,400', description: 'Comfortable and versatile messenger bag.', image: 'bag4_brown.jpg' },
-            { id: 8, name: 'Laptop Backpack', color: 'Black', price: '₹1,400', description: 'Comfortable and versatile messenger bag.', image: 'bag4_black.jpg' }
+            { id: 1, name: 'Standard Bag', color: 'Brown', price: '₹2,000', description: 'High-quality leather briefcase for professionals.', image: 'BF/Images/bag1_brown.jpg' },
+            { id: 2, name: 'Standard Bag', color: 'Black', price: '₹2,000', description: 'High-quality leather briefcase for professionals.', image: 'BF/Images/bag1_black.jpg' },
+            { id: 3, name: 'Gym Duffel Bag', color: 'Brown', price: '₹1,999', description: 'Durable and stylish backpack for everyday use.', image: 'BF/Images/bag2_brown.jpg' },
+            { id: 4, name: 'Gym Duffel Bag', color: 'Black', price: '₹1,999', description: 'Durable and stylish backpack for everyday use.', image: 'BF/Images/bag2_black.jpg' },
+            { id: 5, name: 'Laptop Messenger Bag', color: 'Brown', price: '₹3,299', description: 'Spacious duffel bag for all your travel needs.', image: 'BF/Images/bag3_brown.jpg' },
+            { id: 6, name: 'Laptop Messenger Bag', color: 'Black', price: '₹3,299', description: 'Spacious duffel bag for all your travel needs.', image: 'BF/Images/bag3_black.jpg' },
+            { id: 7, name: 'Laptop Backpack', color: 'Black', price: '₹1,400', description: 'Comfortable and versatile messenger bag.', image: 'BF/Images/bag4_black.jpg' },
         ];
 
         function displayProducts(products) {
