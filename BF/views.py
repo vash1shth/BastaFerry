@@ -51,10 +51,12 @@ def product_detail(request, id):
 
 def product_list(request):
     products = Product.objects.all()
-    print("Products fetched from the database:")
+    print(f"Number of products fetched: {products.count()}")  # Debugging count
     for product in products:
-        print(f"Name: {product.name}, Price: {product.price}, Image: {product.image.url}")
-    return render(request, 'test.html', {'products': products})
+        print(f"Name: {product.name}, Price: {product.price}, Image URL: {product.image.url}")  # Detailed debugging
+    context = {'products': products}
+    print(f"Context being passed to template: {context}")  # Debugging context
+    return render(request, 'test.html', context)
 
 
 
