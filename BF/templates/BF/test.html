@@ -5,46 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Men's Bags</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" crossorigin="anonymous"></script>
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom right, #00C4CC, #0A1A44);
-            color: white;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
         }
-        header {
+        .navbar {
+            background-color: white !important;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background-color: white;
-            color: black;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        header .icons {
-            display: flex;
-            gap: 20px;
-            color: black;
-        }
-        header .icons i {
-            font-size: 24px;
+        .icons i {
+            font-size: 20px;
+            margin-left: 15px;
             cursor: pointer;
-        }
-        header input {
-            padding: 5px;
         }
         .product-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             padding: 20px;
+            justify-content: center;
         }
         .product-card {
             border: 1px solid #ccc;
             padding: 10px;
-            width: calc(25% - 40px);
+            width: 250px;
+            background-color: white;
+            color: black;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
         }
         .product-card img {
             max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
         }
         .product-card h3 {
             margin: 10px 0;
@@ -58,75 +66,38 @@
             border: none;
             padding: 10px;
             cursor: pointer;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            color: black;
+            width: 100%;
+            border-radius: 5px;
         }
     </style>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
+    <nav class="navbar">
         <h1>Shop Men's Bags</h1>
-        <input type="text" id="search" placeholder="Search...">
         <div class="icons">
             <i class="fas fa-user"></i>
-            <i class="fas fa-shopping-cart"></i>
             <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-cart"></i>
         </div>
-    </header>
+    </nav>
+
     <main>
-        <div class="product-grid" id="productGrid">
-            <!-- Product Cards will be inserted here by JavaScript -->
-        </div>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }} - {{ product.color }}" 
+                         onerror="this.onerror=null; this.src='/static/default-image.jpg';">
+                    <h3>{{ product.name }} ({{ product.color }})</h3>
+                    <p>{{ product.price }}</p>
+                    <p>{{ product.description }}</p>
+                    <button><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            {% empty %}
+                <p>No products available.</p>
+            {% endfor %}
+        </div>  
     </main>
-    <footer>
-        <p>© 2025 Bastaferry</p>
-    </footer>
-
-    <script>
-        const products = [
-            { id: 1, name: 'Standard Bag', color: 'Brown', price: '₹2,000', description: 'High-quality leather briefcase for professionals.', image: '/static/BF/Images/bag1_brown.jpg' },
-            { id: 2, name: 'Standard Bag', color: 'Black', price: '₹2,000', description: 'High-quality leather briefcase for professionals.', image: '/static/BF/Images/bag1_black.jpg' },
-            { id: 3, name: 'Gym Duffel Bag', color: 'Brown', price: '₹1,999', description: 'Durable and stylish backpack for everyday use.', image: '/static/BF/Images/bag2_brown.jpg' },
-            { id: 4, name: 'Gym Duffel Bag', color: 'Black', price: '₹1,999', description: 'Durable and stylish backpack for everyday use.', image: '/static/BF/Images/bag2_black.jpg' },
-            { id: 5, name: 'Laptop Messenger Bag', color: 'Brown', price: '₹3,299', description: 'Spacious duffel bag for all your travel needs.', image: '/static/BF/Images/bag3_brown.jpg' },
-            { id: 6, name: 'Laptop Messenger Bag', color: 'Black', price: '₹3,299', description: 'Spacious duffel bag for all your travel needs.', image: '/static/BF/Images/bag3_black.jpg' },
-            { id: 7, name: 'Laptop Backpack', color: 'Black', price: '₹1,400', description: 'Comfortable and versatile messenger bag.', image: '/static/BF/Images/bag4_black.jpg' },
-        ];
-
-        function displayProducts(products) {
-            const productGrid = document.getElementById('productGrid');
-            productGrid.innerHTML = '';
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name} - ${product.color}">
-                    <h3>${product.name} (${product.color})</h3>
-                    <p>${product.price}</p>
-                    <p>${product.description}</p>
-                    <button>Add to Cart</button>
-                `;
-                productGrid.appendChild(productCard);
-            });
-        }
-
-        document.getElementById('search').addEventListener('input', (e) => {
-            const searchValue = e.target.value.toLowerCase();
-            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchValue) || product.color.toLowerCase().includes(searchValue));
-            displayProducts(filteredProducts);
-        });
-
-        displayProducts(products);
-    </script>
 </body>
 </html>
-
-
-
 
 

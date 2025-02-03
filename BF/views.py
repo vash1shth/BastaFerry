@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.forms import UserCreationForm
@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm
+from .models import Product
 
 
 
@@ -42,6 +43,17 @@ def signup(request):
 #@login_required
 def buynow(request):
     return render(request, 'BF/test.html')
+
+
+def product_detail(request, id):
+    product = get_object_or_404(Product, id=id)
+    return render(request, 'BF/product_detail.html', {'product': product})
+
+def product_list(request):
+    products = Product.objects.all()
+    print(products)
+    return render(request, 'BF/test.html', {'products': products})
+
 
 
 

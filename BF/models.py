@@ -48,3 +48,12 @@ from django.contrib.auth.models import AbstractBaseUser
 #     def has_module_perms(self, app_label):
 #         return True
 
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    color = models.CharField(max_length=50)
+    price = models.CharField(max_length=20)
+    description = models.TextField()
+    image = models.ImageField(upload_to='products/')
+
+    def __str__(self):
+        return f'{self.name} ({self.color})'
