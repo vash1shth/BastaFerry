@@ -51,8 +51,10 @@ def product_detail(request, id):
 
 def product_list(request):
     products = Product.objects.all()
-    print(products)
-    return render(request, 'BF/test.html', {'products': products})
+    print("Products fetched from the database:")
+    for product in products:
+        print(f"Name: {product.name}, Price: {product.price}, Image: {product.image.url}")
+    return render(request, 'test.html', {'products': products})
 
 
 
