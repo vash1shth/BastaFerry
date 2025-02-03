@@ -65,10 +65,24 @@
         }
         .man img {
             width: 500px;
+            animation: bounce 2s infinite; /* Add bounce animation */
         }
         .basta-ferry {
             font-size: 1.5em;
             color: rgb(255, 255, 255);
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        @keyframes fadeIn{
+            to {
+                opacity: 1;
+            }
         }
         .bastaferry-section {
             display: flex;
@@ -95,6 +109,15 @@
         .bastaferry-image img {
             width: 100%;
             border-radius: 15px;
+            transition: tranform 0.3s ease; /* smooth transition for zoom effect */
+        }
+        .basta-ferry img:hover {
+            transform: scale(1.1); /* zoom effect on hover */
+        }
+        @keyframes textFadeIn {
+            to {
+                opacity: 1;
+            }
         }
         .choose-bastaferry {
             padding: 50px;
@@ -254,9 +277,10 @@
             <a href="{% url 'buynow' %}" class="button">Buy Now</a>
         </div>
         <div class="man">
-            <img src="{% static 'BF/Images/man.png' %}" alt="Man Image">
+            <img id="waving-hand" src="{% static 'BF/Images/man.png' %}" alt="Man Image">
         </div>
     </div>
+    
     <!-- New BastaFerry Section -->
     <div class="bastaferry-section">
         <div class="bastaferry-text">

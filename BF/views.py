@@ -49,14 +49,19 @@ def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
     return render(request, 'BF/product_detail.html', {'product': product})
 
+from django.shortcuts import render
+from .models import Product
+
 def product_list(request):
     products = Product.objects.all()
-    print(f"Number of products fetched: {products.count()}")  # Debugging count
+    print("Products fetched from the database:")
     for product in products:
-        print(f"Name: {product.name}, Price: {product.price}, Image URL: {product.image.url}")  # Detailed debugging
-    context = {'products': products}
-    print(f"Context being passed to template: {context}")  # Debugging context
-    return render(request, 'test.html', context)
+        print(f"Name: {product.name}, Price: {product.price}, Image: {product.image.url}")
+    
+    # Debug: Check if products are being passed to the template
+    print(f"Number of products passed to template: {products.count()}")
+    
+    return render(request, 'BF/test.html', {'products': products})
 
 
 
