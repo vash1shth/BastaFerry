@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm
 from .models import Product
-
+from django.shortcuts import render
+from .models import Product
 
 
 def home(request):
@@ -42,15 +43,15 @@ def signup(request):
 
 #@login_required
 def buynow(request):
-    return render(request, 'BF/test.html')
+    products = Product.objects.all()
+    return render(request, 'BF/test.html',{'products': products})
 
 
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
     return render(request, 'BF/product_detail.html', {'product': product})
 
-from django.shortcuts import render
-from .models import Product
+
 
 def product_list(request):
     products = Product.objects.all()
@@ -62,6 +63,9 @@ def product_list(request):
     print(f"Number of products passed to template: {products.count()}")
     
     return render(request, 'BF/test.html', {'products': products})
+
+
+
 
 
 

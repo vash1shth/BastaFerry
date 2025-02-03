@@ -84,6 +84,7 @@
     <main>
         <div class="product-grid">
             <p>Number of products: {{ products|length }}</p>  <!-- Debugging output -->
+    
             {% for product in products %}
                 <div class="product-card">
                     <p>Product: {{ product.name }}</p>  <!-- Additional debugging -->
