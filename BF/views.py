@@ -8,7 +8,8 @@ from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm
 from .models import Product
 from django.shortcuts import render
-from .models import Product
+from .models import Product , PastOrder
+from .forms import UserProfileForm, AddressForm, ProfileForm
 
 
 def home(request):
@@ -63,6 +64,63 @@ def product_list(request):
     print(f"Number of products passed to template: {products.count()}")
     
     return render(request, 'BF/test.html', {'products': products})
+
+
+#@login_required
+def favorite_products(request):
+    favorite_products = request.user.favorite_products.all()
+    return render(request, 'BF/favourite.html', {'favorite_products': favorite_products})
+
+#@login_required
+def save_to_favorites(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    request.user.favorite_products.add(product)
+    return redirect('favorites')
+
+#@login_required
+def past_orders(request):
+    past_orders = request.user.past_orders.all()
+    return render(request, 'BF/past_orders.html', {'past_orders': past_orders})
+
+#@login_required
+def user_profile(request):
+    return render(request, 'BF/user_profile.html', {'user': request.user})
+
+#@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserProfileForm(request.POST, request.FILES, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('user_profile')
+    else:
+        user_form = UserProfileForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+
+    return render(request, 'BF/update_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    })
+
+#@login_required
+def add_address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            return redirect('user_profile')
+    else:
+        form = AddressForm()
+
+    return render(request, 'BF/add_address.html', {'form': form})
+
+
+
 
 
 

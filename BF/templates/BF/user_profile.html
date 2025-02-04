@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .profile-info h2 {
+            margin: 0;
+        }
+        .profile-info p {
+            margin: 5px 0;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .address-list, .order-list {
+            margin-top: 20px;
+        }
+        .address-list li, .order-list li {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            {% if user.profile.profile_picture %}
+                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+            {% else %}
+                <img src="{% static 'BF/Images/default-profile.png' %}" alt="Default Profile Picture" class="profile-picture">
+            {% endif %}
+            <div class="profile-info">
+                <h2>{{ user.username }}</h2>
+                <p>Email: {{ user.email }}</p>
+                <p>Phone: {{ user.profile.phone_number }}</p>
+                <p>Gender: {{ user.profile.gender }}</p>
+                <p>Date of Birth: {{ user.profile.date_of_birth }}</p>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button class="btn-custom" onclick="window.location.href='{% url 'update_profile' %}'">Update Profile</button>
+            <button class="btn-custom" onclick="window.location.href='{% url 'add_address' %}'">Add Address</button>
+        </div>
+        <h3>Addresses</h3>
+        <ul class="address-list">
+            {% for address in user.addresses.all %}
+                <li>{{ address.address_line1 }}, {{ address.city }}, {{ address.state }}, {{ address.country }}</li>
+            {% empty %}
+                <li>No addresses available.</li>
+            {% endfor %}
+        </ul>
+        <h3>Past Orders</h3>
+        <ul class="order-list">
+            {% for order in user.past_orders.all %}
+                <li>Order of {{ order.product.name }} on {{ order.order_date }} - Quantity: {{ order.quantity }} - Total: {{ order.total_price }}</li>
+            {% empty %}
+                <li>No past orders available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

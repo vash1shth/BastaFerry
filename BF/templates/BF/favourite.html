@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Men's Bags</title>
+    <title>Favorite Products</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" crossorigin="anonymous"></script>
     <style>
@@ -29,20 +29,6 @@
         .logo img {
             width: 70px;
             margin-right: 10px;
-        }
-        .search-bar {
-            width: 50%;
-        }
-        .search-input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .icons i {
-            font-size: 20px;
-            margin-left: 15px;
-            cursor: pointer;
         }
         .product-grid {
             display: flex;
@@ -88,14 +74,6 @@
             width: 100%;
             border-radius: 5px;
         }
-        .heart-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 24px;
-            color: red;
-        }
     </style>
 </head>
 <body>
@@ -104,21 +82,17 @@
             <img src="{% static 'BF/Images/BFlogo.png' %}" alt="Basta Ferry Logo">
             <span>BastaFerry</span>
         </div>
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Search for products...">
-        </div>
         <div class="icons">
-            <i class="fas fa-user" onclick="window.location.href='{% url 'user_profile' %}'"></i>
-            <i class="fas fa-heart" onclick="window.location.href='{% url 'favorites' %}'"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-heart"></i>
             <i class="fas fa-shopping-cart"></i>
         </div>
     </nav>
 
     <main>
         <div class="product-grid">
-            {% for product in products %}
+            {% for product in favorite_products %}
                 <div class="product-card">
-                    <i class="fas fa-heart heart-icon" onclick="window.location.href='{% url 'save_to_favorites' product.id %}'"></i>
                     <a href="{% url 'product_detail' product.id %}">
                         <img src="{{ product.image.url }}" alt="{{ product.name }} - {{ product.color }}" onerror="this.onerror=null; this.src='{% static 'default-image.jpg' %}';">
                     </a>
@@ -127,17 +101,10 @@
                     <button><i class="fas fa-cart-plus"></i> Add to Cart</button>
                 </div>
             {% empty %}
-                <p>No products available.</p>
+                <p>No favorite products available.</p>
             {% endfor %}
         </div>
     </main>
 </body>
 </html>
-
-
-
-
-
-
-
 
