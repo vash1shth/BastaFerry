@@ -27,6 +27,12 @@ class Address(models.Model):
     def __str__(self):
         return f'{self.address_line1}, {self.city}, {self.country}'
     
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="favorite_products")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+  
 class PastOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='past_orders')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -48,7 +54,7 @@ class UserProfile(models.Model):
     favorite_products = models.ManyToManyField(Product, related_name='favorited_by_profiles', blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.usernameBF_userprofile
     
 
 @receiver(post_save, sender=User)

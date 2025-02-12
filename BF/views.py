@@ -72,9 +72,12 @@ def favorite_products(request):
     return render(request, 'BF/favourite.html', {'favorite_products': favorite_products})
 
 #@login_required
+
+
 def save_to_favorites(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    request.user.favorite_products.add(product)
+    user = request.user
+    product.favorited_by.add(user)  # Correcting the attribute
     return redirect('favorites')
 
 #@login_required
