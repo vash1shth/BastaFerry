@@ -10,6 +10,7 @@ from .models import Product
 from django.shortcuts import render
 from .models import Product , PastOrder
 from .forms import UserProfileForm, AddressForm, ProfileForm
+from .models import Favorite
 
 
 def home(request):
@@ -22,7 +23,8 @@ def login(request):
         password = request.POST['password']
         # Perform authentication here
         # If authentication is successful
-        return render(request, 'BF/test.html')
+        products = Product.objects.all()
+        return render(request, 'BF/test.html',{'products': products})
     else:
         # If GET request or any other method
         return render(request, 'BF/login.html')
@@ -42,7 +44,7 @@ def signup(request):
 
     return render(request, 'BF/signup.html', {'form': form})
 
-#@login_required
+@login_required
 def buynow(request):
     products = Product.objects.all()
     return render(request, 'BF/test.html',{'products': products})
@@ -66,30 +68,38 @@ def product_list(request):
     return render(request, 'BF/test.html', {'products': products})
 
 
-#@login_required
-def favorite_products(request):
-    favorite_products = request.user.favorite_products.all()
-    return render(request, 'BF/favourite.html', {'favorite_products': favorite_products})
 
-#@login_required
+@login_required(login_url='/login/')
+def favorite_products(request):
+    user = request.user
+    favorites = Favorite.objects.filter(user=user)
+    return render(request, 'favorite.html', {'favorites': favorites})
 
 
 def save_to_favorites(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    user = request.user
-    product.favorited_by.add(user)  # Correcting the attribute
-    return redirect('favorites')
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, id=product_id)
+        user = request.user
+        # Create or get the favorite object
+        favorite, created = Favorite.objects.get_or_create(user=user, product=product)
+        if created:
+            # The favorite was created
+            favorite.save()
+            # You can add messages or other actions here
+        return redirect('favourites')  # Update 'some-view-name' to the appropriate view name
+    else:
+        return redirect('/login/')
 
-#@login_required
+@login_required
 def past_orders(request):
     past_orders = request.user.past_orders.all()
     return render(request, 'BF/past_orders.html', {'past_orders': past_orders})
 
-#@login_required
+@login_required
 def user_profile(request):
     return render(request, 'BF/user_profile.html', {'user': request.user})
 
-#@login_required
+@login_required
 def update_profile(request):
     if request.method == 'POST':
         user_form = UserProfileForm(request.POST, request.FILES, instance=request.user)
@@ -108,7 +118,7 @@ def update_profile(request):
         'profile_form': profile_form,
     })
 
-#@login_required
+@login_required
 def add_address(request):
     if request.method == 'POST':
         form = AddressForm(request.POST)
