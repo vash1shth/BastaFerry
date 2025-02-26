@@ -44,7 +44,7 @@ def signup(request):
 
     return render(request, 'BF/signup.html', {'form': form})
 
-@login_required
+# @login_required
 def buynow(request):
     products = Product.objects.all()
     return render(request, 'BF/test.html',{'products': products})
