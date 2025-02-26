@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>BastaFerry - Add to Cart</h1>
+    </header>
+    <main>
+        <h2>Product Added to Cart</h2>
+        <p>Your product has been successfully added to your cart.</p>
+        <a href="{% url 'view_cart' %}">View Cart</a>
+        <a href="{% url 'product_list' %}">Continue Shopping</a>
+    </main>
+    <footer>
+        <p>&copy; 2025 BastaFerry. All rights reserved.</p>
+    </footer>
+</body>
+</html>

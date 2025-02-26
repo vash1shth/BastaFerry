@@ -18,6 +18,8 @@ urlpatterns = [
     path('user_profile/', views.user_profile, name='user_profile'),
     path('update_profile/', views.update_profile, name='update_profile'),
     path('add_address/', views.add_address, name='add_address'),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.view_cart, name='view_cart'),
 ]
 
 if settings.DEBUG:

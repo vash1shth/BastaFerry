@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+    </header>
+    <main>
+        {% if cart_items %}
+            <ul>
+                {% for item in cart_items %}
+                    <li>{{ item.product.name }} - {{ item.quantity }} x ${{ item.product.price }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+        {% else %}
+            <p>Your cart is empty.</p>
+            <a href="{% url 'product_list' %}">Continue Shopping</a>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 BastaFerry. All rights reserved.</p>
+    </footer>
+</body>
+</html>

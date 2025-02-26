@@ -10,7 +10,7 @@ from .models import Product
 from django.shortcuts import render
 from .models import Product , PastOrder
 from .forms import UserProfileForm, AddressForm, ProfileForm
-from .models import Favorite
+from .models import Favorite, CartItem
 
 
 def home(request):
@@ -132,7 +132,17 @@ def add_address(request):
 
     return render(request, 'BF/add_address.html', {'form': form})
 
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        cart_item.quantity += 1
+    cart_item.save()
+    return redirect('view_cart')
 
+def view_cart(request):
+    cart_items = CartItem.objects.filter(user=request.user)
+    return render(request, 'cart.html', {'cart_items': cart_items})
 
 
 
