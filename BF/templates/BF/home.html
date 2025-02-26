@@ -39,8 +39,9 @@
             color: white;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
+            text-decoration: none; /* Remove underline */
         }
         .main-content {
             display: flex;
@@ -109,7 +110,7 @@
         .bastaferry-image img {
             width: 100%;
             border-radius: 15px;
-            transition: tranform 0.3s ease; /* smooth transition for zoom effect */
+            transition: transform 0.3s ease; /* smooth transition for zoom effect */
         }
         .basta-ferry img:hover {
             transform: scale(1.1); /* zoom effect on hover */
@@ -135,7 +136,7 @@
             margin-top: 20px;
         }
         .reason {
-            background-color: linear-gradient(to bottom right, #00C4CC, #0A1A44);
+            background: linear-gradient(to bottom right, #00C4CC, #0A1A44);
             border-radius: 10px;
             padding: 20px;
             max-width: 30%;
@@ -218,7 +219,7 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center;
-            background-color: linear-gradient(to bottom right, #00C4CC, #0A1A44);
+            background: linear-gradient(to bottom right, #00C4CC, #0A1A44);
             padding: 20px; 
             color: #ffffff;  
         }
@@ -256,7 +257,61 @@
         } 
         .shopping-bag img { 
             width: 100px; 
-            height: auto; }
+            height: auto; 
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .main-content {
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+            .welcome-section {
+                align-items: center;
+            }
+            .man img {
+                width: 100%;
+                max-width: 300px;
+            }
+            .bastaferry-section {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .bastaferry-text, .bastaferry-image {
+                max-width: 100%;
+            }
+            .reasons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .reason {
+                max-width: 80%;
+                margin-bottom: 20px;
+            }
+            .testimonials, .collections {
+                flex-direction: column;
+                align-items: center;
+            }
+            .testimonial, .collection {
+                max-width: 80%;
+                margin-bottom: 20px;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-info {
+                flex-direction: column;
+            }
+            .shopping-bag {
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -371,28 +426,3 @@
     </div>
     <p>&copy; 2025 Basta Ferry. All rights reserved.</p>
 </div>
-
-
-
-    <!-- JavaScript to dynamically set images -->
-    <script>
-        const reasons = [
-            { id: "reason1-img", src: "{% static 'BF/Images/reason1-img.png' %}" },
-            { id: "reason2-img", src: "{% static 'BF/Images/reason2-img.png' %}" },
-            { id: "reason3-img", src: "{% static 'BF/Images/reason3-img.png' %}" }
-        ];
-
-        reasons.forEach(reason => {
-            document.getElementById(reason.id).src = reason.src;
-        });
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
